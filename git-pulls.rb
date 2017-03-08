@@ -2,7 +2,7 @@
 #                http://www.rubydoc.info/github/Homebrew/brew/master/Formula
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
 
-class HomebrewGitPulls < Formula
+class GitPulls < Formula
   desc "git-pulls command pulls all git repository under specified paths."
   homepage "https://github.com/hayashier/homebrew-git-pulls/README.md"
   head "https://github.com/hayashier/homebrew-git-pulls.git"
@@ -13,7 +13,7 @@ class HomebrewGitPulls < Formula
     # ENV.deparallelize  # if your formula fails when building in parallel
 
     # Remove unrecognized options if warned by configure
-    bin.install "bin/git-pulls"
+    bin.install "bin"
   end
 
   test do
