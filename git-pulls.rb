@@ -4,8 +4,8 @@ HOMEBREW_GITPULLS_VERSION='0.0.2'
 class GitPulls < Formula
   desc "git-pulls command pulls all git repository under specified paths."
   homepage "#{REPOSITORY_URL}/README.md"
-  url "#{REPOSITORY_URL}/archive/0.0.0.zip"
-  sha256 "023ab1168a40344af03dd538d7cbb3f9cb0ca04fea4a5bbe7e4989a00b78cc55"
+  url "#{REPOSITORY_URL}/archive/#{HOMEBREW_GITPULLS_VERSION}.zip"
+  sha256 "04777124c8e1ef8b3ba2d884f91ad47378437611b2b1349e730ef85913c2fa30"
   head "#{REPOSITORY_URL}.git", :tag => "#{HOMEBREW_GITPULLS_VERSION}"
   version "#{HOMEBREW_GITPULLS_VERSION}"
 
