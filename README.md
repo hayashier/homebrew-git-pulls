@@ -1,5 +1,5 @@
 # git-pulls
-`git-pulls` command pulls all git repository under specified paths
+`git-pulls` command pulls all git repositories under specified path.
 
 # Usage
 
