@@ -3,12 +3,32 @@
 function contains() {
     target=$1
     paths=$2
-    for ((i=1;i < $#;i++)) {
-        if [[ $paths[$i]* == $target ]]; then
-          return 0
+    if [[ -z ${paths[1]} ]]; then
+        if [[ `echo "$target" | grep "${paths[0]}"` ]]; then
+            return 0
         fi
-    }
+    else
+        for ((i=0;i < $#;i++)) {
+            if [[ `echo "$target" | grep "${paths[$i]}"`  ]]; then
+              return  0
+            fi
+        }
+    fi
+
     return 1
+}
+
+function formArrayPaths() {
+  exclude_paths=( `echo $1 | tr -s ',' ' '` )
+  for ((i=0;i < ${#exclude_paths[*]};i++)) {
+    path=${exclude_paths[$i]}
+    flag=`echo $path | grep $EXECUTING_PLACE`
+    if [ -z $flag ] && ([ ${path:0:1} == "/" ] || [ ${path:0:1} == "~" ]); then
+        num=`expr ${#path} - 1`
+        exclude_paths[$i]="$EXECUTING_PLACE${path:1:num}"
+    fi
+  }
+  echo ${exclude_paths[@]}
 }
 
 if [ -z $1 ]; then
@@ -33,7 +53,8 @@ while getopts ":e:h" OPT ;
 do
     case $OPT in
     e)
-        exclude_paths=( `echo $OPTARG | tr -s ',' ' '`)
+        result=(`formArrayPaths $OPTARG`)
+        exclude_paths=${result[@]}
         ;;
     h)
         echo 'Usage: git-pulls [-h] [-e /exclusivePath1/to,/exclusivePath2/to,/exclusivePath3/to ] /path/to'
@@ -58,7 +79,7 @@ fi
 
 echo "Start pulling all git project in $origin."
 if [ -n $exclusive_path ]; then
-    echo "Exclude path: $exclude_paths"
+    echo "Exclude path: ${exclude_paths[@]}"
 fi
 
-find $origin -type d -name .git | xargs -n 1 dirname | sort | while read line; do echo $line && if [ `contains $line $exclude_paths` ]; then echo "Passing..."; continue; fi  && cd $line && git pull && cd $origin; done
+find $origin -type d -name .git | xargs -n 1 dirname | sort | while read line; do echo $line ; contains $line $exclude_paths; if [ $? -eq 0 ]; then echo "Passing..."; continue; fi  && cd $line && git pull && cd $origin; done

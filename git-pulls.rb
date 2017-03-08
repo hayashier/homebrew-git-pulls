@@ -1,5 +1,5 @@
 REPOSITORY_URL='https://github.com/hayashier/homebrew-git-pulls'
-HOMEBREW_GITPULLS_VERSION='0.0.2'
+HOMEBREW_GITPULLS_VERSION='0.0.3'
 
 class GitPulls < Formula
   desc "git-pulls command pulls all git repository under specified paths."
