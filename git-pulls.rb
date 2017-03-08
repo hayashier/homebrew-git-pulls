@@ -5,7 +5,7 @@ class GitPulls < Formula
   desc "git-pulls command pulls all git repository under specified paths."
   homepage "#{REPOSITORY_URL}/README.md"
   url "#{REPOSITORY_URL}/archive/#{HOMEBREW_GITPULLS_VERSION}.tar.gz"
-  sha256 "b9897275782a118410fd93255746e63e009781479b1522e6c5db1768cbb965d1"
+  sha256 "2b25ee7a707b7c6b7f935b3a37b265eb20c480eab3401a16867b3e8d6bb002ef"
   head "#{REPOSITORY_URL}.git", :tag => "#{HOMEBREW_GITPULLS_VERSION}"
   version "#{HOMEBREW_GITPULLS_VERSION}"
 
