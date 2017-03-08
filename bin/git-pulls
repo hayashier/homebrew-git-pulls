@@ -1,4 +1,4 @@
-#!/bgin/bash
+#!/bin/bash
 
 function contains() {
   target=$1
