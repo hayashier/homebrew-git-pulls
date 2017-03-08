@@ -11,7 +11,7 @@ function contains() {
     return 1
 }
 
-if [ -z "$1" ]; then
+if [ -z $1 ]; then
     echo 'Usage: git-pulls [-h] [-e /exclusivePath1/to,/exclusivePath2/to,/exclusivePath3/to ] /path/to'
     exit
 fi
@@ -41,7 +41,11 @@ do
         ;;
     esac
 done
-shift $(($OPTIND - 2))
+
+SHIFT_NUM=$((OPTIND - 2))
+if [ $SHIFT_NUM -gt 0 ]; then
+    shift $(($OPTIND - 2))
+fi
 
 if $FLAG; then
     shift 1
