@@ -12,7 +12,7 @@ function contains() {
 }
 
 if [ -z "$1" ]; then
-    echo 'Usage: gitter [-h] [-e /exclusive path1/to,/exclusive path2/to,/exclusive path3/to ] /path/to'
+    echo 'Usage: gitter [-h] [-e /exclusivePath1/to,/exclusivePath2/to,/exclusivePath3/to ] /path/to'
     exit
 fi
 
@@ -36,7 +36,7 @@ do
         exclude_paths=( `echo $OPTARG | tr -s ',' ' '`)
         ;;
     h)
-        echo 'Usage: gitter [-h] [-e /exclusive path1/to,/exclusive path2/to,/exclusive path3/to ] /path/to'
+        echo 'Usage: gitter [-h] [-e /exclusivePath1/to,/exclusivePath2/to,/exclusivePath3/to ] /path/to'
         exit
         ;;
     esac
