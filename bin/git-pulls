@@ -2,14 +2,17 @@
 
 function contains() {
   target=$1
-  paths=$2
-  if [[ -z ${paths[1]} ]]; then
-    if [[ `echo "$target" | grep "${paths[0]}"` ]]; then
+  shift
+  paths=( `echo $@ | tr -s ' ' ' '` )
+  if [ "${paths[1]}" == " " ]; then
+    flag=`echo $target | grep ${paths[0]}`
+    if [[ -n $flag ]]; then
       return 0
     fi
   else
-    for ((i=0;i < $#;i++)) {
-      if [[ `echo "$target" | grep "${paths[$i]}"`  ]]; then
+    for ((i=0;i < ${#paths[@]};i++)) {
+      flag=`echo $target | grep ${paths[$i]}`
+      if [[ -n $flag  ]]; then
         return  0
       fi
     }
@@ -82,4 +85,4 @@ if [ -n $exclusive_path ]; then
   echo "Exclude path: ${exclude_paths[@]}"
 fi
 
-find $origin -type d -name .git | xargs -n 1 dirname | sort | while read line; do echo $line ; contains $line $exclude_paths; if [ $? -eq 0 ]; then echo "Passing..."; continue; fi  && cd $line && git pull && cd $origin; done
+find $origin -type d -name .git | xargs -n 1 dirname | sort | while read line; do echo $line ; contains $line ${exclude_paths[@]}; if [ $? -eq 0 ]; then echo "Passing..."; continue; fi  && cd $line && git pull && cd $origin; done
