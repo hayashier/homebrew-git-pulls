@@ -1,6 +1,13 @@
 # git-pulls
 `git-pulls` command pulls all git repositories under specified path.
 
+# Install (OSX)
+
+```
+$ brew tap hayashier/git-pulls
+$ brew install git-pulls
+```
+
 # Usage
 
 ```
