@@ -11,6 +11,9 @@ function contains() {
     fi
   else
     for ((i=0;i < ${#paths[@]};i++)) {
+      if [ ${paths[$i]} == [] ]; then
+        continue
+      fi
       flag=`echo $target | grep ${paths[$i]}`
       if [[ -n $flag  ]]; then
         return  0
