@@ -29,7 +29,7 @@ function formArrayPaths() {
   for ((i=0;i < ${#exclude_paths[*]};i++)) {
     path=${exclude_paths[$i]}
     flag=`echo $path | grep $EXECUTING_PLACE`
-    if [ -z $flag ] && ([ ${path:0:1} == "/" ] || [ ${path:0:1} == "~" ]); then
+    if [ -n $flag ] && [ $i -ne 0 ] && ([ ${path:0:1} == "/" ] || [ ${path:0:1} == "~" ]); then
         num=`expr ${#path} - 1`
         exclude_paths[$i]="$EXECUTING_PLACE${path:1:num}"
     fi
