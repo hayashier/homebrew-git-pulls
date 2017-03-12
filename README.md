@@ -11,5 +11,13 @@ $ brew install git-pulls
 # Usage
 
 ```
-$ git-pulls [-h] [-e /exclusive path1/to,/exclusive path2/to,/exclusive path3/to ] /path/to
+$ git-pulls [-v] [-h] [-e /exclusivePath1/to,/exclusivePath2/to,/exclusivePath3/to ] /path/to
+```
+
+## Options
+
+```
+-v : Display version
+-h : Display usage
+-e : Specify path which exclude paths. If you specify multiple paths, enumerate paths separated by comma
 ```
