@@ -5,9 +5,9 @@ GIT_PULLS_VESION="0.0.4"
 function contains() {
   target=$1
   shift
-  paths=( `echo $@ | tr -s ' ' ' '` )
+  paths=$(echo $@ | tr -s ' ' ' ')
   if [ "${paths[1]}" == " " ]; then
-    flag=`echo $target | grep ${paths[0]}`
+    flag=$(echo $target | grep ${paths[0]})
     if [[ -n $flag ]]; then
       return 0
     fi
@@ -16,7 +16,7 @@ function contains() {
       if [ ${paths[$i]} == [] ]; then
         continue
       fi
-      flag=`echo $target | grep ${paths[$i]}`
+      flag=$(echo $target | grep ${paths[$i]})
       if [[ -n $flag  ]]; then
         return  0
       fi
@@ -27,13 +27,13 @@ function contains() {
 }
 
 function formArrayPaths() {
-  exclude_paths=( `echo $1 | tr -s ',' ' '` )
-  for ((i=0;i < ${#exclude_paths[*]};i++)) {
+  exclude_paths=$(echo $1 | tr -s ',' ' ')
+  for ((i=0;i < ${#exclude_paths[@]};i++)) {
     path=${exclude_paths[$i]}
-    flag=`echo $path | grep $EXECUTING_PLACE`
+    flag=$(echo $path | grep $EXECUTING_PLACE)
     if [ -n $flag ] && [ $i -ne 0 ] && ([ ${path:0:1} == "/" ] || [ ${path:0:1} == "~" ]); then
-        num=`expr ${#path} - 1`
-        exclude_paths[$i]="$EXECUTING_PLACE${path:1:num}"
+      num=$(( ${#path} - 1))
+      exclude_paths[$i]="$EXECUTING_PLACE${path:1:num}"
     fi
   }
   echo ${exclude_paths[@]}
@@ -61,7 +61,7 @@ while getopts ":e:hv" OPT ;
 do
   case $OPT in
   e)
-    result=(`formArrayPaths $OPTARG`)
+    result=$(formArrayPaths $OPTARG)
     exclude_paths=${result[@]}
     ;;
   h)
@@ -77,7 +77,7 @@ done
 
 SHIFT_NUM=$((OPTIND - 2))
 if [ $SHIFT_NUM -gt 0 ]; then
-  shift $(($OPTIND - 2))
+  shift $SHIFT_NUM
 fi
 
 if $FLAG; then
