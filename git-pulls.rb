@@ -1,5 +1,5 @@
 REPOSITORY_URL="https://github.com/hayashier/homebrew-git-pulls".freeze
-HOMEBREW_GITPULLS_VERSION="0.0.4".freeze
+HOMEBREW_GITPULLS_VERSION="0.0.5".freeze
 
 class GitPulls < Formula
   desc "Pulls all git repository under specified paths."

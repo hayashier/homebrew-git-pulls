@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GIT_PULLS_VESION="0.0.4"
+GIT_PULLS_VESION="0.0.5"
 
 function contains() {
   target=$1
